@@ -1,0 +1,34 @@
+Reproducible Research: Peer Assessment 1
+========================================
+
+
+## Loading and preprocessing the data
+
+```{r}
+steps = read.csv(header=T, file="activity.csv")
+uniqueDaysList = unique(steps$date)
+uniqueIntervalList = unique(steps$interval)
+```
+
+## What is mean total number of steps taken per day?
+
+```{r}
+sumPerDay = lapply(uniqueDaysList, function(x) { sum(na.rm = T, steps[ steps$date == x, "steps" ] ) } )
+hist(as.integer(sumPerDay))
+mean(as.integer(sumPerDay), na.rm = T)
+median(as.integer(sumPerDay), na.rm = T)
+```
+
+## What is the average daily activity pattern?
+```{r}
+avgPerInterval = lapply(uniqueIntervalList, function(x) { mean(na.rm = T, steps[ steps$interval == x, "steps" ] ) } )
+avgPerIntervalDF = data.frame("interval"=uniqueIntervalList, "avgSteps"=as.double(avgPerInterval))
+plot( x=uniqueIntervalList, y=avgPerInterval, type="l")
+avgPerIntervalDF[which.max(avgPerIntervalDF$avgSteps),"interval"]
+```
+
+## Imputing missing values
+
+
+
+## Are there differences in activity patterns between weekdays and weekends?
