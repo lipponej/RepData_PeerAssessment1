@@ -5,6 +5,7 @@ Reproducible Research: Peer Assessment 1
 ## Loading and preprocessing the data
 
 ```{r}
+library(ggplot2)
 steps = read.csv(header=T, file="activity.csv")
 uniqueDaysList = unique(steps$date)
 uniqueIntervalList = unique(steps$interval)
@@ -73,9 +74,19 @@ There is bigger impact on mean than the median. Also histogram has altered shape
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+Creating data frame with weekdays information.
 ```{r}
+weekdaysChar = mapply(function(x) {
+    weekday = weekdays(as.POSIXct(x))
+    if( weekday == "Sunday" || weekday == "Saturday")
+        return("weekend")
+    else
+        return("weekday")
+}, steps$date)
+weekdaysFac = as.factor(weekdaysChar)
+stepsWithWeekdays = cbind(steps, weekdaysFac)
 ```
+Creating plots for weekend and weekday cases.
 ```{r}
-```
-```{r}
+qplot(x=interval, y=stepsWithNAsReplaced, data=stepsWithWeekdays, xlab="Interval", facets=weekdaysFac~., geom=c("line"))
 ```
