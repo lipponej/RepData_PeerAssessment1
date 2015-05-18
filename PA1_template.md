@@ -1,3 +1,8 @@
+---
+output:
+  html_document:
+    keep_md: yes
+---
 Reproducible Research: Peer Assessment 1
 ========================================
 
@@ -21,7 +26,7 @@ sumPerDay = lapply(uniqueDaysList, function(x) { sum(na.rm = T, steps[ steps$dat
 hist(as.integer(sumPerDay))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 Mean of steps daily:
 
@@ -52,7 +57,7 @@ avgPerIntervalDF = data.frame("interval"=uniqueIntervalList, "avgSteps"=as.doubl
 plot( x=uniqueIntervalList, y=avgPerInterval, type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 Interval with maximum average steps:
 
 ```r
@@ -86,7 +91,7 @@ sumPerDayWithoutNAs = lapply(uniqueDaysList, function(x) { sum(steps[ steps$date
 hist(as.integer(sumPerDayWithoutNAs))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
 
 Mean of steps daily with NAs as avarage:
 
@@ -130,4 +135,4 @@ Creating plots for weekend and weekday cases.
 qplot(x=interval, y=stepsWithNAsReplaced, data=stepsWithWeekdays, xlab="Interval", facets=weekdaysFac~., geom=c("line"))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
